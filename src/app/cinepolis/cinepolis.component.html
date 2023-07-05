@@ -1,0 +1,57 @@
+<div class="container cinepolis-container">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="display-4 cinepolis-title">Boletos Cinépolis</h1>
+      <div class="cinepolis-form">
+        <div class="row">
+          <div class="col-2">
+            <label for="nombre" class="form-label">Nombre Comprador</label>
+            <input class="form-control" id="nombre" [(ngModel)]="nombre" type="text">
+          </div>
+          <div class="col-2">
+            <label for="compradores" class="form-label">Número de Compradores</label>
+            <input class="form-control" id="compradores" [(ngModel)]="Compradores" type="number" min="0">
+          </div>
+          <div class="col-2">
+            <label for="boletos" class="form-label">Boletos a Comprar</label>
+            <input class="form-control" id="boletos" [(ngModel)]="Boletos" type="number" min="0">
+          </div>
+          <div class="col-2">
+            <label for="opcion1" class="form-label">Tarjeta Cineco</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="opcion1" name="opcion" [(ngModel)]="Tarjeta" value="true">
+              <label class="form-check-label" for="opcion1">Si</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="opcion2" name="opcion" [(ngModel)]="Tarjeta" value="false" >
+              <label class="form-check-label" for="opcion1">No</label>
+            </div>
+          </div>
+                  
+          <div class="col-12">
+            <button class="btn btn-primary" (click)="calcular()">Calcular</button>
+          </div>
+          <div class="col-12 mt-3">
+            <div *ngIf="resultados.texto === ''" class="alert alert-success">
+              <h4 class="alert-heading">El total a pagar es: {{ resultados.numero }}</h4>
+            </div>
+            <div *ngIf="resultados.texto !== ''" class="alert alert-danger">
+              <h4 class="alert-heading">{{ resultados.texto }}</h4>
+            </div>
+          </div>
+        </div>
+        <div class="cinepolis-popcorn"></div>
+        <div class="cinepolis-seat-row">
+          <div class="cinepolis-seat"></div>
+          <div class="cinepolis-seat"></div>
+          <div class="cinepolis-seat"></div>
+        </div>
+        <div class="cinepolis-seat-row">
+          <div class="cinepolis-seat"></div>
+          <div class="cinepolis-seat"></div>
+          <div class="cinepolis-seat"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

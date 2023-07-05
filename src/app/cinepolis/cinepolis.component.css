@@ -1,0 +1,46 @@
+.cinepolis-container {
+    background-color: #00579F;
+    padding: 20px;
+  }
+
+  .cinepolis-title {
+    color: #FFF;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .cinepolis-form {
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  .cinepolis-form label {
+    color: #00579F;
+    font-weight: bold;
+  }
+
+  .cinepolis-popcorn {
+    width: 50px;
+    height: 50px;
+    background-color: #FFD700;
+    border-radius: 50%;
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .cinepolis-seat {
+    width: 20px;
+    height: 20px;
+    background-color: #333;
+    border-radius: 5px;
+    margin: 5px;
+    display: inline-block;
+  }
+
+  .cinepolis-seat-row {
+    text-align: center;
+    margin-bottom: 10px;
+  }

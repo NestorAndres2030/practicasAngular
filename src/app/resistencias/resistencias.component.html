@@ -1,0 +1,151 @@
+<div class="container">
+  <div class="col-12">
+    <h2>Elige los colores para calcular la Resistencia</h2>
+    <div class="banda">
+      <h3>Banda 1</h3>
+      <select [(ngModel)]="selectbanda1">
+        <option>Selecciona un color</option>
+        <option *ngFor="let color of banda1" [ngStyle]="getOptionStyles(color)" [value]="color.number">{{ color.name }}</option>
+      </select>
+    </div>
+
+    <div class="banda">
+      <h3>Banda 2</h3>
+      <select [(ngModel)]="selectbanda2">
+        <option value="">Selecciona un color</option>
+        <option *ngFor="let color of banda2" [ngStyle]="getOptionStyles(color)" [value]="color.number">{{ color.name }}</option>
+      </select>
+    </div>
+    <div class="banda">
+      <h3>Multiplicador</h3>
+      <select [(ngModel)]="selectMultiplication">
+        <option value="">Selecciona un color</option>
+        <option *ngFor="let color of multiplicador; let i = index" [ngStyle]="getOptionStyles(color)" [value]="i">{{ color.name }}</option>
+      </select>
+    </div>
+    <div class="banda">
+      <h3>Tolerancia</h3>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="tolerance" id="tolerance1" value=".05" [(ngModel)]="selectedTolerance">
+        <label class="form-check-label" for="tolerance1">
+          Oro
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="tolerance" id="tolerance2" value=".1" [(ngModel)]="selectedTolerance">
+        <label class="form-check-label" for="tolerance2">
+          Plata
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" (click)="calcularResistencia()">Calcular Resistencia</button>
+
+    <div *ngIf="Tabla.length > 0">
+      <h3>Resistencias Calculadas:</h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Banda 1</th>
+            <th>Banda 2</th>
+            <th>Multiplicador</th>
+            <th>Tolerancia </th>
+            <th>Resistencia</th>
+            <th>Valor Mínimo</th>
+            <th>Valor Máximo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let datos of Tabla">
+            <td [style.background-color]="datos.banda1.color">{{ datos.banda1.valor }}</td>
+            <td [style.background-color]="datos.banda2.color">{{ datos.banda2.valor }}</td>
+            <td [style.background-color]="datos.multiplicador.value">{{ datos.multiplicador.number }}</td>
+            <td [style.background-color]="datos.tolerancia.color">{{datos.tolerancia.valor}}</td>
+            <td>{{ datos.resistencia }}</td>
+            <td>{{ datos.valorMinimo }}</td>
+            <td>{{ datos.valorMaximo }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- 
+<div class="container">
+  <div class="col-12">
+    <h2>Elige los colores para calcular la Resistencia</h2>
+    <div class="mb-3">
+      <h3>Banda 1</h3>
+      <select [(ngModel)]="selectbanda1">
+        <option>Selecciona un color</option>
+        <option *ngFor="let color of banda1" [ngStyle]="getOptionStyles(color)" [value]="color.number">{{ color.name }}</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <h3>Banda 2</h3>
+      <select [(ngModel)]="selectbanda2">
+        <option value="">Selecciona un color</option>
+        <option *ngFor="let color of banda2" [ngStyle]="getOptionStyles(color)" [value]="color.number">{{ color.name }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <h3>Multiplicador</h3>
+      <select [(ngModel)]="selectMultiplication">
+        <option value="">Selecciona un color</option>
+        <option *ngFor="let color of multiplicador; let i = index" [ngStyle]="getOptionStyles(color)" [value]="i">{{ color.name }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <h3>Tolerancia</h3>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="tolerance" id="tolerance1" value=".05" [(ngModel)]="selectedTolerance">
+        <label class="form-check-label" for="tolerance1">
+          Oro
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="tolerance" id="tolerance2" value=".1" [(ngModel)]="selectedTolerance">
+        <label class="form-check-label" for="tolerance2">
+          Plata
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" (click)="calcularResistencia()">Calcular Resistencia</button>
+
+    <div *ngIf="Tabla.length > 0">
+      <h3>Resistencias Calculadas:</h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Banda 1</th>
+            <th>Banda 2</th>
+            <th>Multiplicador</th>
+            <th>Tolerancia </th>
+            <th>Resistencia</th>
+            <th>Valor Mínimo</th>
+            <th>Valor Máximo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let datos of Tabla">
+            <td [style.background-color]="datos.banda1.color">{{ datos.banda1.valor }}</td>
+            <td [style.background-color]="datos.banda2.color">{{ datos.banda2.valor }}</td>
+            <td [style.background-color]="datos.multiplicador.value">{{ datos.multiplicador.number }}</td>
+            <td [style.background-color]="datos.tolerancia.color">{{datos.tolerancia.valor}}</td>
+            <td>{{ datos.resistencia }}</td>
+            <td>{{ datos.valorMinimo }}</td>
+            <td>{{ datos.valorMaximo }}</td>
+          </tr>
+        </tbody>
+        
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+
+ -->
