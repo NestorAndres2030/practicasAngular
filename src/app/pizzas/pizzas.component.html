@@ -1,0 +1,161 @@
+<div class="container cinepolis-container">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="display-4 cinepolis-title">Pizzeria Panuchi</h1>
+      <div class="cinepolis-form">
+        <div class="row">
+          <div class="col-3">
+            <label for="nombre" class="form-label">Nombre Comprador</label>
+            <input class="form-control" id="nombre" [(ngModel)]="Nombre" type="text" required> 
+          </div>
+          <div class="col-3">
+            <label for="direccion" class="form-label">Direccion</label>
+            <input class="form-control" id="direccion" [(ngModel)]="Direccion" type="text">
+          </div>
+          <div class="col-3">
+            <label for="boletos" class="form-label">Telefono</label>
+            <input class="form-control" id="telefono" [(ngModel)]="Telefono" type="number">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-2 mt-4">
+            <label class="form-label">Tamaño Pizza</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="opcion1" name="tamanoPizza" [(ngModel)]="tamanoPizza" value="Chica">
+              <label class="form-check-label" for="opcion1">Chica $40</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="opcion2" name="tamanoPizza" [(ngModel)]="tamanoPizza" value="Mediana">
+              <label class="form-check-label" for="opcion2">Mediana $80</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="opcion3" name="tamanoPizza" [(ngModel)]="tamanoPizza" value="Grande">
+              <label class="form-check-label" for="opcion3">Grande $120</label>
+            </div>
+          </div>
+          <div class="col-2 mt-4">
+            <label class="form-label">Ingredientes</label>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="opcion4" name="ingrediente" [(ngModel)]="jamonSeleccionado" (change)="actualizarIngredientes()">
+              <label class="form-check-label" for="opcion4">Jamon $10</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="opcion5" name="ingrediente" [(ngModel)]="pinaSeleccionada" (change)="actualizarIngredientes()">
+              <label class="form-check-label" for="opcion5">Piña $10</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="opcion6" name="ingrediente" [(ngModel)]="champinonesSeleccionados" (change)="actualizarIngredientes()">
+              <label class="form-check-label" for="opcion6">Champiñones $10</label>
+            </div>
+          </div>
+          <div class="col-3 mt-4">
+            <label for="boletos" class="form-label">Numero de Pizzas</label>
+            <input class="form-control" id="numeroPizzas" [(ngModel)]="numeroPizzas" type="number">
+          </div>
+          <div class="col-3 mt-4 text-center">
+            <button class="btn btn-primary m-4" (click)="agregarPizza()">Guardar</button>
+            <button class="btn btn-primary m-4" (click)="terminarCompra()">Terminar</button>
+          </div>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+            <th colspan="5" class="text-center">Tabla de Pizzas</th>
+          </tr>
+            <tr>
+              <th>Tamaño</th>
+              <th>Ingredientes</th>
+              <th>Cantidad</th>
+              <th>Sub Total</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pizza of pizzas; let i = index">
+              <td>{{ pizza.tamano }}</td>
+              <td>{{ pizza.ingredientes.join(', ') }}</td>
+              <td>{{ pizza.cantidad }}</td>
+              <td>{{ pizza.subtotal }}</td> 
+              <td>
+                <button class="btn btn-danger" (click)="eliminarPizza(i)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <table class="table">
+          <thead>
+            <tr>
+              <th colspan="5" class="text-center">Tabla de Pedidos</th>
+            </tr>
+            <tr>
+              <th>Nombre</th>
+              <th>SubTotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pedido of pedidos; let i = index">
+              <td>{{ pedido.nombre }}</td>
+              <td>{{ pedido.subtotal }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="col-2" *ngIf="mostrarTotalClientes && pedidos.length > 0">
+          <h1 colspan="5">Total por cliente:</h1>
+          <div *ngFor="let cliente of obtenerClientes(); let i = index">
+          <h2> <p>{{ cliente.nombre }}: {{ calcularTotalCliente(cliente.nombre) }}</p></h2>
+          </div>
+          <div class="col-3 mt-4 text-center">
+            <button class="btn btn-primary m-4" (click)="finalizarCompra()">Finalizar</button>
+          </div>
+        </div>
+        
+        <!-- <table class="table" *ngIf="pizzas.length">
+          <thead>
+            <tr>
+              <th colspan="5" class="text-center">Tabla de Pizzas</th>
+            </tr>
+            <tr>
+              <th>Tamaño</th>
+              <th>Ingredientes</th>
+              <th>Cantidad</th>
+              <th>Sub Total</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pizza of pizzas; let i = index">
+              <td>{{ pizza.tamano }}</td>
+              <td>{{ pizza.ingredientes.join(', ') }}</td>
+              <td>{{ pizza.cantidad }}</td>
+              <td>{{ pizza.subtotal }}</td> 
+              <td>
+                <button class="btn btn-danger" (click)="eliminarPizza(i)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>SubTotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pedido of pedidos; let i = index">
+              <td>{{ pedido.nombre }}</td>
+              <td>{{ pedido.subtotal }}</td>
+            </tr>
+            <tr *ngIf="pedidos.length >= 2">
+              <td><b>Total ({{ pedidos[0].nombre }} y {{ pedidos[1].nombre }})</b></td>
+              <td><b>{{ obtenerTotalPedidos() }}</b></td>
+            </tr>
+          </tbody>
+        </table> -->
+      
+      </div>
+    </div>
+  </div>
+</div>
